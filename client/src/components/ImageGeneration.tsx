@@ -2,14 +2,28 @@ import { FormEvent, useState } from 'react';
 import  loader  from '../loader/loader.gif'
 
 function ImageGeneration() {
+    interface Prompt {
+        prompt: string
+        n: number
+    }
+
+    interface Result {
+        b64_json: null
+    }
+
+    interface Results extends Array<Result>{}
+
     const [ searchState, setSearchState ] = useState(false)
-    const [ prompt, setPrompt ] = useState('')
-    const [ result, setResult ] = useState(null)
+    const [ prompt, setPrompt ] = useState<Prompt>({
+        prompt: '',
+        n: 1
+    })
+    const [ results, setResults ] = useState<Results>([])
     const [ error, setError ] = useState(null)
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setResult(null)
+        setResults([])
         setError(null)
         setSearchState(true)
       
@@ -28,13 +42,23 @@ function ImageGeneration() {
           setSearchState(false)
         } else {
           setSearchState(false)
-          setResult(data[0].b64_json)
-            console.log(data)
+          setResults(data)
+          console.log(results)
         }
       }
   
-      const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPrompt(event.target.value);
+      const promptStringHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPrompt({
+            ...prompt,
+            prompt: e.target.value
+        });
+      };
+
+      const promptNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPrompt({
+            ...prompt,
+            n: Number(e.target.value)
+        });
       };
 
     return (
@@ -46,16 +70,28 @@ function ImageGeneration() {
             )}
 
             <div className='search'>
-            <form onSubmit={handleSubmit}>
-                <input type='text' onChange={inputHandler} placeholder='Prompt to generate image'/>
-            </form>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <input type='text' onChange={promptStringHandler} placeholder='Prompt to generate image'/>
+                    </div>
+                    <div>
+                        <label>Number of Images To Generate </label>
+                        <input type='number' onChange={promptNumberHandler} defaultValue='1' min='1' max='10'/>
+                    </div>
+                    <button type='submit'>Generate</button>
+                </form>
             </div>
 
             <div className='result'>
-            {searchState === true ? 
-                <img src={loader} alt='loader'/> : 
-                <img src={`data:image/jpeg;base64,${result}`} alt='Genreated'/>
-            }
+                { searchState === true && <img src={loader} alt='loader'/> }
+
+                { results.length > 0 && (
+                    results.map((image, i) => {
+                        return (
+                            <img key={i} src={`data:image/jpeg;base64,${image.b64_json}`} alt='Genreated'/>
+                        )
+                    })
+                ) }
             </div>
         </>
     )

@@ -4,12 +4,12 @@ import  loader  from '../loader/loader.gif'
 function Search() {
     const [ searchState, setSearchState ] = useState(false)
     const [ search, setSearch ] = useState('')
-    const [ result, setResult ] = useState('')
+    const [ result, setResult ] = useState(null)
     const [ error, setError ] = useState(null)
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      setResult('')
+      setResult(null)
       setError(null)
       setSearchState(true)
     

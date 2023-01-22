@@ -4,7 +4,7 @@ function NavBar() {
     return (
         <nav>
             <Link to='/'><p>Search</p></Link>
-            <Link to='/image'><p>Generate Image</p></Link>
+            <Link to='/image'><p>Generate</p></Link>
         </nav>
     )
 }

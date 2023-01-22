@@ -33,15 +33,15 @@ def index():
 
 @app.route('/image', methods=[ 'POST' ])
 def image():
-    params = request.get_json()
-    print(params)
+    query = request.get_json()
+    print(query)
+    print(query['prompt'])
 
     response = openai.Image.create(
-        prompt = f'{params}',
-        n = 1,
+        prompt = query['prompt'],
+        n = query['n'],
         size = "1024x1024",
         response_format = 'b64_json'
     )
 
-    if response:
-        return json.dumps(response['data'])
+    return json.dumps(response['data'])
