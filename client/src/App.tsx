@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 
+import NavBar from './components/NavBar'
 import Search from './components/Search'
 import ImageGeneration from './components/ImageGeneration';
 
@@ -14,6 +15,8 @@ function App() {
         <a href='/'>
         <img src={logo} alt='logo'/>
         </a>
+
+        <NavBar />
       </div>
 
       <Routes>

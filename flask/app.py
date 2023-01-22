@@ -3,6 +3,7 @@ import requests
 from dotenv import load_dotenv
 import os
 import openai
+import json
 
 app = Flask(__name__)
 load_dotenv()
@@ -25,7 +26,7 @@ def index():
 
     response = requests.post(api_url, headers=headers, json=data)
 
-    if response.status_code == 200 :
+    if response.status_code == 200:
         return response.json()
     else:
         return response.json()
@@ -33,6 +34,7 @@ def index():
 @app.route('/image', methods=[ 'POST' ])
 def image():
     params = request.get_json()
+    print(params)
 
     response = openai.Image.create(
         prompt = f'{params}',
@@ -41,11 +43,5 @@ def image():
         response_format = 'b64_json'
     )
 
-    print(response)
-
-    data = response['data'][0]['b64_json']
-
-    if response.status_code == 200 :
-        return data
-    else : 
-        return response.json()
+    if response:
+        return json.dumps(response['data'])
