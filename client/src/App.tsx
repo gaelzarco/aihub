@@ -5,6 +5,7 @@ import ImageGeneration from './components/ImageGeneration';
 
 import './App.css';
 import logo from './loader/logo.svg'
+import footer from './loader/footer.svg'
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
       </div>
         
       <footer>
-        <h1>OpenAI Search</h1>
+        <img src={footer} alt='logo'/>
       </footer>
     </div>
   );

@@ -90,10 +90,8 @@ footer {
   padding-bottom: 50px;
 }
 
-footer h1 {
-  color: rgb(65, 65, 65);
-  font-size: 1.5rem;
-  font-weight: 800;
+footer img {
+  height: 125px;
 }
 
 @keyframes fadeInAnimation {

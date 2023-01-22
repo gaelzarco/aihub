@@ -40,13 +40,13 @@ function Search() {
     <>
         {error && (
         <header>
-            <p style={ { color: 'red' }}>{error}</p>
+            <p style={ { color: 'red', paddingBottom: '50px' }}>{error}</p>
         </header>
         )}
 
         <div className='search'>
         <form onSubmit={handleSubmit}>
-            <input type='text' onChange={inputHandler} placeholder='Search Here'/>
+            <input type='text' onChange={inputHandler} placeholder='Say, Ask, Search or Request'/>
         </form>
         </div>
 

@@ -21,7 +21,7 @@ def index():
         'Authorization': f'Bearer {openai.api_key}'
     }
 
-    data = {"model": "text-davinci-003", "prompt":  f"{search}", "temperature": 0.1, "max_tokens": 1000}
+    data = {"model": "text-davinci-003", "prompt":  f"{search}", "temperature": 0, "max_tokens": 1000}
 
     response = requests.post(api_url, headers=headers, json=data)
 
