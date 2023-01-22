@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import  loader  from '../loader/loader.gif'
 
-function ImageGeneration() {
+function DALLE() {
     interface Prompt {
         prompt: string
         n: number
@@ -91,4 +91,4 @@ function ImageGeneration() {
     )
 }
 
-export default ImageGeneration
+export default DALLE

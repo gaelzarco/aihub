@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 function NavBar() {
     return (
         <nav>
-            <Link to='/'><p>Search</p></Link>
-            <Link to='/image'><p>Generate</p></Link>
+            <Link to='/'><p>GPT-3</p></Link>
+            <Link to='/image'><p>DALL·E</p></Link>
         </nav>
     )
 }

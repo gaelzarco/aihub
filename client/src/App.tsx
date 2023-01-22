@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
-import Search from './components/Search'
-import ImageGeneration from './components/ImageGeneration';
+import GPT3 from './components/GPT3'
+import DALLE from './components/DALLE';
 
 import './App.css';
 import logo from './loader/logo.svg'
@@ -20,8 +20,8 @@ function App() {
       </div>
 
       <Routes>
-        <Route path='/' element={<Search />} />
-        <Route path='/image' element={<ImageGeneration/>} />
+        <Route path='/' element={<GPT3 />} />
+        <Route path='/image' element={<DALLE/>} />
       </Routes>
 
       <div className='FAQ'>

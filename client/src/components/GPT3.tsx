@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import  loader  from '../loader/loader.gif'
 
-function Search() {
+function GPT3() {
     const [ searchState, setSearchState ] = useState(false)
     const [ search, setSearch ] = useState('')
     const [ result, setResult ] = useState(null)
@@ -52,4 +52,4 @@ function Search() {
   )
 }
 
-export default Search
+export default GPT3
