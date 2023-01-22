@@ -25,7 +25,27 @@ def index():
 
     response = requests.post(api_url, headers=headers, json=data)
 
-    if response.status_code == 200:
+    if response.status_code == 200 :
         return response.json()
     else:
+        return response.json()
+
+@app.route('/image', methods=[ 'POST' ])
+def image():
+    params = request.get_json()
+
+    response = openai.Image.create(
+        prompt = f'{params}',
+        n = 1,
+        size = "1024x1024",
+        response_format = 'b64_json'
+    )
+
+    print(response)
+
+    data = response['data'][0]['b64_json']
+
+    if response.status_code == 200 :
+        return data
+    else : 
         return response.json()
