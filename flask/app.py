@@ -1,5 +1,4 @@
 from flask import ( Flask, request )
-import requests
 from dotenv import load_dotenv
 import os
 import openai
@@ -15,32 +14,23 @@ openai.Model.list()
 def index():
     search = request.get_json()
 
-    api_url = 'https://api.openai.com/v1/completions'
+    response = openai.Completion.create(
+        model = 'text-davinci-003',
+        prompt = search,
+        temperature = 0,
+        max_tokens = 1000
+    )
 
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {openai.api_key}'
-    }
-
-    data = {"model": "text-davinci-003", "prompt":  f"{search}", "temperature": 0, "max_tokens": 1000}
-
-    response = requests.post(api_url, headers=headers, json=data)
-
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return response.json()
+    return response
 
 @app.route('/image', methods=[ 'POST' ])
 def image():
     query = request.get_json()
-    print(query)
-    print(query['prompt'])
 
     response = openai.Image.create(
         prompt = query['prompt'],
         n = query['n'],
-        size = "1024x1024",
+        size = '1024x1024',
         response_format = 'b64_json'
     )
 

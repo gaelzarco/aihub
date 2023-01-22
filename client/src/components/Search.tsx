@@ -23,13 +23,8 @@ function Search() {
     
       const data = await response.json()
     
-      if (data.error) {
-        setError(data.error.message)
-        setSearchState(false)
-      } else {
-        setSearchState(false)
-        setResult(data.choices[0].text)
-      }
+      setSearchState(false)
+      setResult(data.choices[0].text)
     }
 
     const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

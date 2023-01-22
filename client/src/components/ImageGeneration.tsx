@@ -36,15 +36,9 @@ function ImageGeneration() {
         })
       
         const data = await response.json()
-      
-        if (data.err) {
-          setError(data.err)
-          setSearchState(false)
-        } else {
-          setSearchState(false)
-          setResults(data)
-          console.log(results)
-        }
+
+        setSearchState(false)
+        setResults(data)
       }
   
       const promptStringHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +66,7 @@ function ImageGeneration() {
             <div className='search'>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <input type='text' onChange={promptStringHandler} placeholder='Prompt to generate image'/>
+                        <input type='text' onChange={promptStringHandler} placeholder='Image Generation Prompt'/>
                     </div>
                     <div>
                         <label>Number of Images To Generate </label>
@@ -83,15 +77,15 @@ function ImageGeneration() {
             </div>
 
             <div className='result'>
-                { searchState === true && <img src={loader} alt='loader'/> }
+                {searchState === true && <img src={loader} alt='loader'/>}
 
-                { results.length > 0 && (
+                {results.length > 0 && (
                     results.map((image, i) => {
                         return (
                             <img key={i} src={`data:image/jpeg;base64,${image.b64_json}`} alt='Genreated'/>
                         )
                     })
-                ) }
+                )}
             </div>
         </>
     )

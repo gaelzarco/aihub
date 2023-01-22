@@ -29,7 +29,7 @@ function App() {
 
         <div className='FAQ-content'>
           <h3>What?</h3>
-          <p>This is a small project made with React/TypeScript and Flask. It features a PostgreSQL database for user authentication and search query storage. All search queries are driven by OpenAI's GPT-3 API Model.</p>
+          <p>This website allows users to communicate with OpenAI's various API Models on a single web-page. It was created with React, TypeScript, Flask and features a PostgreSQL database. All search queries are driven by OpenAI's GPT-3 API Model.</p>
 
           <h3>Why?</h3>
           <p>I made this project as means of communicating with OpenAI's various API Models on a single web-page. Users can create an account to save their search queries, generated images, and more.</p>
@@ -39,7 +39,7 @@ function App() {
       </div>
         
       <footer>
-        <img src={footer} alt='logo'/>
+        <a href='https://github.com/gaelzarco/aihub' target='_blank' rel='noreferrer'><img src={footer} alt='logo'/></a>
       </footer>
     </div>
   );
