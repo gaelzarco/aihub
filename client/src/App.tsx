@@ -25,12 +25,12 @@ function App() {
 
         <div className='FAQ-content'>
           <h3>What?</h3>
-          <p>This is a small project made with React and Flask. It features a PostgreSQL database for user authentication and search query storage. All search queries are driven by OpenAI's GPT-3 API model.</p>
+          <p>This is a small project made with React/TypeScript and Flask. It features a PostgreSQL database for user authentication and search query storage. All search queries are driven by OpenAI's GPT-3 API Model.</p>
 
           <h3>Why?</h3>
-          <p>I made this project as a proof of concept of what a future search engine could look like. Search engines today promote SEO optimized websites that want your time, money, and personal information. As the web grows saturated with ads, there will come a point where AI could replace the search engines of today and provide users with answers; not peddle endless amounts of consumerism.</p>
+          <p>I made this project as means of communicating with OpenAI's various API Models on a single web-page. Users can create an account to save their search queries, generated images, and more.</p>
 
-          <p>Heavily inspired by <a href='https://12ft.io/' target='_blank' rel="noreferrer">12ft.io</a>, I created this website to demonstrate what the search engines of the future could look like.</p>
+          <p>If you like the project, feel free to reach out on <a href='https://www.linkedin.com/in/gaelzarco/' target='_blank' rel="noreferrer">LinkedIn</a>.</p>
         </div>
       </div>
         
