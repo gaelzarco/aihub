@@ -31,21 +31,44 @@ nav .active {
 
 input {
   font-weight: 200;
-  border: solid 1px rgba(65, 65, 65, 0.274);
+  border: solid 1px rgba(65, 65, 65, 0.25);
   color: rgb(65, 65, 65);
   border-radius: 5px;
   font-size: 0.8rem;
   padding: 12px;
-  transition: all .5s;
+  transition: all .3s ease-in-out;
 }
 
 input[type=text] {
   min-width: 300px;
 }
 
+input[type=number] {
+  width: 75px;
+}
+
 input:focus {
   outline: none;
-  border: solid 1px rgba(65, 65, 65, 0.623);
+  border: solid 1px rgba(65, 65, 65, 0.5);
+}
+
+button {
+  cursor: pointer;
+  font-family: ui-sans-serif;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 5px;
+  padding-left:10px;
+  padding-right: 10px;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+  color: rgba(65, 65, 65, 0.525);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: rgba(65, 65, 65, 0.65);
 }
 
 .logo {
@@ -70,7 +93,7 @@ input:focus {
   margin-top: 50px;
   min-height: 160px;
   width: 600px;
-  display: inline-flex;
+  /* display: inline-flex; */
   justify-content: center;
   align-content: center;
 }
@@ -87,6 +110,16 @@ input:focus {
   animation: fadeInAnimation ease 1s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+}
+
+.result div {
+  display: inline-flex;
+  padding-bottom: 40px;
+}
+
+.result .dall-e-img {
+  height: 256px;
+  padding: 10px;
 }
 
 .FAQ {

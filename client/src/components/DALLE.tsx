@@ -1,4 +1,7 @@
 import { FormEvent, useState } from 'react';
+
+import Gallery from './Gallery';
+
 import  loader  from '../loader/loader.gif'
 
 function DALLE() {
@@ -20,6 +23,8 @@ function DALLE() {
     })
     const [ results, setResults ] = useState<Results>([])
     const [ error, setError ] = useState(null)
+    const [ galleryState, setGalleryState ] = useState(false)
+    const [ gallery, setGallery ] = useState(null)
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -63,16 +68,17 @@ function DALLE() {
             </header>
             )}
 
+            {(galleryState === true && gallery !== null) && (
+                <Gallery data={gallery} />
+            )}
+
             <div className='search'>
                 <form onSubmit={handleSubmit}>
-                    <div>
-                        <input type='text' onChange={promptStringHandler} placeholder='Image Generation Prompt'/>
-                    </div>
-                    <div>
-                        <label>Number of Images To Generate </label>
-                        <input type='number' onChange={promptNumberHandler} defaultValue='1' min='1' max='10'/>
-                    </div>
-                    <button type='submit'>Generate</button>
+                        <input type='text' onChange={promptStringHandler} placeholder='Image Prompt'/>
+                        <input type='number' onChange={promptNumberHandler} placeholder='Amount' min='1' max='10'/>
+                        <div>
+                            <button type='submit'>Generate</button>
+                        </div>
                 </form>
             </div>
 
@@ -82,7 +88,12 @@ function DALLE() {
                 {results.length > 0 && (
                     results.map((image, i) => {
                         return (
-                            <img key={i} src={`data:image/jpeg;base64,${image.b64_json}`} alt='Genreated'/>
+                            <div onClick={() => {
+                                setGallery(image.b64_json)
+                                setGalleryState(!galleryState)
+                                }} key={i}>
+                                <img className='dall-e-img' src={`data:image/jpeg;base64,${image.b64_json}`} alt={`${prompt.prompt}`}/>
+                            </div>
                         )
                     })
                 )}

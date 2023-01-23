@@ -12,11 +12,11 @@ openai.Model.list()
 
 @app.route('/', methods=[ 'POST' ])
 def index():
-    search = request.get_json()
+    query = request.get_json()
 
     response = openai.Completion.create(
         model = 'text-davinci-003',
-        prompt = search,
+        prompt = query,
         temperature = 0,
         max_tokens = 1000
     )
