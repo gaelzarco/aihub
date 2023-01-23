@@ -6,13 +6,17 @@ function GPT3() {
     const [ searchState, setSearchState ] = useState(false)
     const [ search, setSearch ] = useState('')
     const [ result, setResult ] = useState(null)
-    const [ error, setError ] = useState(null)
+    const [ error, setError ] = useState('')
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       setResult(null)
-      setError(null)
+      setError('')
       setSearchState(true)
+
+      if (search.length < 1) {
+        return setError('Please enter a prompt')
+      }
     
       const response = await fetch('/', {
         method: 'POST',
@@ -47,7 +51,7 @@ function GPT3() {
         </div>
 
         <div className='result'>
-        {searchState === true ? <img src={loader} alt='loader'/> : <p>{result}</p>}
+        {(searchState === true && error.length === 0)? <img src={loader} alt='loader'/> : <p>{result}</p>}
         </div>
     </>
   )
