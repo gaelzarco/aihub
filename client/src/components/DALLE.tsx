@@ -36,6 +36,10 @@ function DALLE() {
         if (prompt.prompt.length < 1) {
             return setError('Please enter a prompt')
         }
+
+        if (prompt.n < 1 || prompt.n > 10) {
+            return setError('Please enter a value between 0 and 11')
+        }
       
         const response = await fetch('/image', {
           method: 'POST',

@@ -2,24 +2,20 @@ import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
 
 function NavBar() {
-    const [ active, setActive ] = useState('gpt')
-    let path = window.location.pathname
+    const [ active, setActive ] = useState('')
 
     const setActiveId = (e: React.SyntheticEvent) => {
         setActive((e.target as HTMLElement).id)
+        console.log(active)
     }
 
     return (
         <nav>
-            <Link to='/'>
-                <p className={active === 'gpt' ? 'nav-active' : 'nav-item'} id='gpt' onClick={(e) => setActiveId(e)}>
-                    GPT-3
-                </p>
+            <Link className={active === 'gpt' ? 'active' : ''} id='gpt' to='/chat' onClick={(e) => setActiveId(e)}>
+                GPT-3
             </Link>
-            <Link to='/image'>
-                <p className={active === 'dall' ? 'nav-active' : 'nav-item'} id='dall' onClick={(e) => setActiveId(e)}>
-                    DALL·E
-                </p>
+            <Link className={active === 'dall' ? 'active' : ''} id='dall' to='/image' onClick={(e) => setActiveId(e)}>
+                DALL·E
             </Link>
         </nav>
     )
