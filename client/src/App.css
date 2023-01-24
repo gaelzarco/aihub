@@ -44,9 +44,19 @@
 }
 
 .pop-cancel {
+  cursor: pointer;
   position: fixed;
   margin-right: 900px;
   margin-bottom: 200px;
+  transition: all .2s ease-in-out;
+}
+
+.pop-cancel:hover {
+  transform: scale(1.05);
+}
+
+.gallery {
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.205);
 }
 
 nav {
@@ -136,8 +146,15 @@ input:focus {
 }
 
 .result .dall-e-img {
+  cursor: pointer;
   height: 256px;
   padding: 10px;
+  transition: all .2s ease-in-out;
+}
+
+.result .dall-e-img:hover {
+  transform: scale(1.05);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.205);
 }
 
 .FAQ {

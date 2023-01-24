@@ -5,7 +5,7 @@ interface GalleryProps {
 function Gallery({ data } : GalleryProps) {
     return (
         <>
-            <img src={`data:image/jpeg;base64,${data}`} alt='Clicked'/>
+            <img className='gallery' src={`data:image/jpeg;base64,${data}`} alt='Clicked'/>
         </>
     )
 }
