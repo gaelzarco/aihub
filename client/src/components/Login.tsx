@@ -13,18 +13,17 @@ function Login() {
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      console.log(credentials)
     
-    //   const response = await fetch('/', {
-    //     method: 'POST',
-    //     headers : {
-    //       'Content-Type': 'application/json'
-    //       },
-    //     body: JSON.stringify(credentials)
-    //   })
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers : {
+          'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(credentials)
+      })
     
-    //   const data = await response.json()
-    //   console.log(data)
+      const data = await response.json()
+      console.log(data)
     }
 
     const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +37,7 @@ function Login() {
     const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({...credentials, password: event.target.value});
     };
-    
+
     return (
         <div className='pop-container'>
             <div className='pop-user-form'>
