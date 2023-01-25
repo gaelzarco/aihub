@@ -1,11 +1,20 @@
 from flask import ( Flask, request )
+from flask_migrate import Migrate
 from dotenv import load_dotenv
-import os
 import openai
+import os
 import json
+
+import models
 
 app = Flask(__name__)
 load_dotenv()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+models.db.init_app(app)
+migrate = Migrate(app, models.db)
 
 openai.api_key = os.environ.get('OAI_SECRET_KEY')
 openai.Model.list()
@@ -47,3 +56,6 @@ def login():
     credentials = request.get_json()
 
     return {'data': credentials }
+
+if __name__  ==  '__main__':
+    app.run(debug=True)

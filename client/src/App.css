@@ -185,8 +185,7 @@ input[type=number]:out-of-range {
 }
 
 .result .dall-e-img:hover {
-  z-index: 1;
-  transform: scale(1.5);
+  transform: scale(1.2);
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.205);
 }
 
