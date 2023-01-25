@@ -6,7 +6,6 @@ function NavBar() {
 
     const setActiveId = (e: React.SyntheticEvent) => {
         setActive((e.target as HTMLElement).id)
-        console.log(active)
     }
 
     return (

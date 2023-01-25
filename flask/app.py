@@ -40,14 +40,10 @@ def image():
 def create():
     credentials = request.get_json()
 
-    print(credentials)
-
     return {'data': credentials }
 
 @app.route('/login', methods=[ 'POST' ])
 def login():
     credentials = request.get_json()
-
-    print(credentials)
 
     return {'data': credentials }
