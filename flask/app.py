@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import openai
 import os
 import json
-
+import random
 import models
 
 app = Flask(__name__)
@@ -45,17 +45,31 @@ def image():
 
     return json.dumps(response['data'])
 
-@app.route('/create', methods=[ 'POST' ])
+@app.route('/create', methods=[ 'GET', 'POST' ])
 def create():
     credentials = request.get_json()
+    
+    email_credential=credentials['email']
+    username_credential=credentials['username']
+    password_credential=credentials['password']
 
-    return {'data': credentials }
+    rand_int=random.randint(100000000000, 999999999999)
+
+    new_user = models.User(id = rand_int, email = email_credential, username = username_credential, password = password_credential)
+    models.db.session.add(new_user)
+    models.db.session.commit()
+
+    user = models.User.query.filter_by(email=F'{email_credential}').first()
+
+    print(user)
+
+    return { 'data': credentials}
 
 @app.route('/login', methods=[ 'POST' ])
 def login():
     credentials = request.get_json()
 
-    return {'data': credentials }
+    return { 'data': credentials }
 
 if __name__  ==  '__main__':
     app.run(debug=True)

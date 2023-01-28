@@ -94,7 +94,7 @@ function DALLE() {
             <div className='search'>
                 <form onSubmit={handleSubmit}>
                     <input type='text' onChange={promptStringHandler} placeholder='Image Prompt'/>
-                    <input type='number' onChange={promptNumberHandler} placeholder='Amount' min='1' max='10'/>
+                    <input type='number' onChange={promptNumberHandler} placeholder='1' min='1' max='10'/>
                     <input type='submit' style={{display: 'none'}}/>
                 </form>
             </div>
