@@ -80,7 +80,27 @@ def create():
 def login():
     credentials = request.get_json()
 
-    return { 'data': credentials }
+    email_credential = credentials['email']
+    username_credential = credentials['username']
+    password_credential = credentials['password']
+
+    print(bool(models.User.query.filter_by(email=email_credential).first()))
+
+    if bool(models.User.query.filter_by(email=email_credential).first()) != True:
+        return make_response(json.dumps({ 'err': 'Entered email does not match. Please try again.' }), 400)
+    elif bool(models.User.query.filter_by(username=username_credential).first()) != True:
+        return make_response(json.dumps({ 'err': 'Entered username does not match. Please try again.' }), 400)
+    elif bool(models.User.query.filter_by(password=password_credential).first()) != True:
+        return make_response(json.dumps({ 'err': 'Entered password does not match. Please try again.' }), 400)
+
+    found_user = models.User.query.filter_by(email=email_credential).first()
+
+    user = {
+        'email': found_user.email,
+        'username': found_user.username
+    }
+
+    return json.dumps(user)
 
 if __name__  ==  '__main__':
     app.run(debug=True)

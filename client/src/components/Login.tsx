@@ -10,6 +10,7 @@ function Login() {
         username: '',
         password: ''
     })
+    const [ errMsg, setErrMsg ] = useState('')
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
@@ -23,6 +24,11 @@ function Login() {
       })
     
       const data = await response.json()
+
+      if(data.err) {
+        setErrMsg(prevState => prevState = data.err)
+      }
+      
       console.log(data)
     }
 
@@ -46,6 +52,10 @@ function Login() {
                 </div>
 
                 <h1>Login</h1>
+
+                {errMsg.length > 1 && (
+                    <p className='err'>{errMsg}</p>
+                )}
 
                 <div>
                 <form onSubmit={handleSubmit}>
