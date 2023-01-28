@@ -10,6 +10,7 @@ function CreateAccount() {
         username: '',
         password: ''
     })
+    const [ errMsg, setErrMsg ] = useState('')
     
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
@@ -23,6 +24,11 @@ function CreateAccount() {
       })
     
       const data = await response.json()
+
+      if(data.err) {
+        setErrMsg(prevState => prevState = data.err)
+      }
+
       console.log(data)
     }
 
@@ -44,6 +50,10 @@ function CreateAccount() {
                 </div>
 
                 <h2>Create an Account</h2>
+
+                {errMsg.length > 1 && (
+                    <p className='err'>{errMsg}</p>
+                )}
 
                 <div>
                 <form onSubmit={handleSubmit}>

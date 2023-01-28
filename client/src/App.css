@@ -50,6 +50,11 @@
   width: 80%;
 }
 
+.pop-user-form .err {
+  font-size: 20px;
+  color: rgb(255, 0, 55)
+}
+
 
 :is(.pop-user-form) input[type=password], input[type=email] {
   width: 300px;

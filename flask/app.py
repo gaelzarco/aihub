@@ -57,7 +57,7 @@ def create():
     id_credential = rand_int
 
     if models.User.query.filter_by(id=id_credential).first():
-        return make_response(json.dumps({ 'err': 'User with created ID already exists. Please try again.' }), 400)
+        return make_response(json.dumps({ 'err': 'User with assigned user ID already exists. This is a server error. Please try again.' }), 400)
     elif models.User.query.filter_by(email=email_credential).first():
         return make_response(json.dumps({ 'err': 'User with selected email already exists. Please try a different one.' }), 400)
     elif models.User.query.filter_by(username=username_credential).first():
