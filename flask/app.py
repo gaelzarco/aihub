@@ -1,4 +1,4 @@
-from flask import ( Flask, request )
+from flask import ( Flask, request, make_response )
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 import openai
@@ -45,25 +45,36 @@ def image():
 
     return json.dumps(response['data'])
 
-@app.route('/create', methods=[ 'GET', 'POST' ])
+@app.route('/create', methods=[ 'POST' ])
 def create():
     credentials = request.get_json()
     
-    email_credential=credentials['email']
-    username_credential=credentials['username']
-    password_credential=credentials['password']
+    email_credential = credentials['email']
+    username_credential = credentials['username']
+    password_credential = credentials['password']
 
-    rand_int=random.randint(100000000000, 999999999999)
+    rand_int = random.randint(100000000000, 999999999999)
+    id_credential = rand_int
 
-    new_user = models.User(id = rand_int, email = email_credential, username = username_credential, password = password_credential)
+    if models.User.query.filter_by(id=id_credential).first():
+        return make_response(json.dumps({ 'err': 'User with created ID already exists. Please try again.' }), 400)
+    elif models.User.query.filter_by(email=email_credential).first():
+        return make_response(json.dumps({ 'err': 'User with selected email already exists. Please try a different one.' }), 400)
+    elif models.User.query.filter_by(username=username_credential).first():
+        return make_response(json.dumps({ 'err': 'User with selected username already exists. Please try a different one.' }), 400)
+
+    new_user = models.User(id = id_credential, email = email_credential, username = username_credential, password = password_credential)
     models.db.session.add(new_user)
     models.db.session.commit()
 
-    user = models.User.query.filter_by(email=F'{email_credential}').first()
+    found_user = models.User.query.filter_by(id=id_credential).first()
 
-    print(user)
+    user = {
+        'email': found_user.email,
+        'username': found_user.username
+    }
 
-    return { 'data': credentials}
+    return json.dumps(user)
 
 @app.route('/login', methods=[ 'POST' ])
 def login():
