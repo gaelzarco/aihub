@@ -9,9 +9,12 @@ import GPT3 from './components/GPT3'
 import DALLE from './components/DALLE';
 import Footer from './components/Footer';
 
+import { useStateContext } from './context/StateContext';
 import logo from './loader/logo.svg'
 
 function App() {
+  const { auth } = useStateContext()
+
   return (
     <div className="app">
       <div className='logo'>
