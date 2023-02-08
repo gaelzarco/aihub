@@ -1,9 +1,11 @@
 import { AiFillCloseSquare } from "react-icons/ai"
 import { FormEvent, useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import { useStateContext } from "../context/StateContext"
 
 function CreateAccount() {
     const navigate = useNavigate()
+    const { auth, login } = useStateContext()
 
     const [ credentials, setCredentials ] = useState({
         email: '',
@@ -29,18 +31,20 @@ function CreateAccount() {
         setErrMsg(prevState => prevState = data.err)
       }
 
-      console.log(data)
+      login(data)
     }
 
     const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
       setCredentials({...credentials, email: event.target.value});
     };
     const usernameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCredentials({...credentials, username: event.target.value});
-      };
-      const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCredentials({...credentials, password: event.target.value});
-      };
+      setCredentials({...credentials, username: event.target.value});
+    };
+    const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setCredentials({...credentials, password: event.target.value});
+    };
+
+    console.log(auth)
 
     return (
         <div className='pop-container'>
@@ -54,6 +58,8 @@ function CreateAccount() {
                 {errMsg.length > 1 && (
                     <p className='err'>{errMsg}</p>
                 )}
+
+                <p>{ auth.username }</p>
 
                 <div>
                 <form onSubmit={handleSubmit}>

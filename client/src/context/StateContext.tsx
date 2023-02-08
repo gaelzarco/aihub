@@ -1,46 +1,48 @@
-import { ReactNode, createContext, useContext, useState } from "react"
+import { ReactNode, createContext, useContext } from "react"
 
+type StateContextProviderProps = {
+    children: ReactNode
+}
 type User = {
     email: string,
     username: string
 }
-
 type Login = (user: User) => void
+type Logout = () => void
 
-type Props = {
-    children: ReactNode
+
+let auth: User = {
+    email: '',
+    username: ''
 }
 
-const Context = createContext({
+const login: Login = (user) => {
+    auth = {...user}
+}
+
+const logout: Logout = () => {
+    auth = {
+        email: '',
+        username: ''
+    }
+}
+
+const UserContext = createContext({
     auth: {
         email: '',
         username: ''
     },
-    login: auth: User,
-
+    login,
+    logout
 })
 
-export const StateContext = ({ children }: Props) => {
+export const StateContext = ({children} : StateContextProviderProps) => {    
 
-    const [ auth, setAuth ] = useState({})
-
-    const login = (user: User) => {
-        setAuth(user)
-    }
-
-    const logout = () => setAuth({})
-
-    return (
-        <Context.Provider
-        value={{
-            auth,
-            login,
-            logout
-        }}
-        >
-            {children}
-        </Context.Provider>
-    )
+    return <UserContext.Provider value={{
+        auth,
+        login,
+        logout
+    }}>{children}</UserContext.Provider>
 }
 
-export const useStateContext = () => useContext(Context)
+export const useStateContext = () => useContext(UserContext)
